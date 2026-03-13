@@ -1,5 +1,6 @@
 import { Navigate, Route, Routes } from "react-router";
-import MarketLayout from "./Layout/MarketLayout";
+import Register from "./Auth/Register";
+import Login from "./Auth/Login";
 
 function App() {
   return (
@@ -14,10 +15,9 @@ function App() {
         <Route path=":id" />
       </Route>
 
-      <Route path="/login" />
-      <Route path="/register" />
+      <Route path="/login" element={<Login />} />
+      <Route path="/register" element={<Register />} />
 
-      <Route path="/logout" />
       <Route path="/cart" />
 
       <Route path="*" element={<Navigate to="/products" replace />} />

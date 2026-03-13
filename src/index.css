@@ -2,9 +2,34 @@ header {
   padding: 1rem;
   display: flex;
   justify-content: space-between;
+  border-bottom: 1px solid gray;
 }
 
-header .user-actions {
+nav,
+.user-actions {
   display: flex;
   gap: 1rem;
+}
+
+.register,
+.login {
+  width: 100vw;
+  height: 40vh;
+
+  display: grid;
+  justify-items: center;
+}
+
+form {
+  padding: 1ch;
+  border: 1px solid gray;
+}
+
+form label {
+  display: grid;
+}
+
+form input {
+  padding: 1ch;
+  border: 1px solid gray;
 }

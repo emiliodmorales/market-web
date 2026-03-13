@@ -12,7 +12,7 @@ import { Link, NavLink } from "react-router";
 import { useAuth } from "../Auth/AuthContext";
 
 export default function Navbar() {
-  const { token } = useAuth();
+  const { token, logout } = useAuth();
 
   return (
     <header>
@@ -45,12 +45,10 @@ export default function Navbar() {
 
       {token ? (
         <div className="user-actions">
-          <Link to="/logout">
-            <Button variant="outlined">
-              <LogOut />
-              Logout
-            </Button>
-          </Link>
+          <Button variant="outlined" onClick={logout}>
+            <LogOut />
+            Logout
+          </Button>
           <Link to="/cart">
             <Button variant="contained">
               <ShoppingCart />

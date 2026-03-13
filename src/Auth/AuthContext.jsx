@@ -1,4 +1,5 @@
 import { createContext, useContext, useEffect, useState } from "react";
+import { useNavigate } from "react-router";
 
 const API = import.meta.env.VITE_API_BASE + "/users";
 
@@ -6,6 +7,7 @@ const AuthContext = createContext();
 
 export function AuthProvider({ children }) {
   const [token, setToken] = useState(null);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const data = window.sessionStorage.getItem("token");
@@ -22,9 +24,10 @@ export function AuthProvider({ children }) {
     });
     const result = await response.json();
     if (!response.ok) {
-      throw Error(result.message);
+      throw Error(result.error);
     }
-    console.log(result);
+    setToken(result.token);
+    window.sessionStorage.setItem("token", result.token);
   };
 
   const login = async (credentials) => {
@@ -35,13 +38,16 @@ export function AuthProvider({ children }) {
     });
     const result = await response.json();
     if (!response.ok) {
-      throw Error(result.message);
+      throw Error(result.error);
     }
-    console.log(result);
+    setToken(result.token);
+    window.sessionStorage.setItem("token", result.token);
   };
 
   const logout = () => {
     setToken(null);
+    window.sessionStorage.removeItem("token");
+    navigate("/products");
   };
 
   const value = { token, register, login, logout };
