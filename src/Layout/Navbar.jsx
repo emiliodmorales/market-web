@@ -10,9 +10,11 @@ import {
 } from "lucide-react";
 import { Link, NavLink } from "react-router";
 import { useAuth } from "../Auth/AuthContext";
+import { useCart } from "../Cart/CartContext";
 
 export default function Navbar() {
   const { token, logout } = useAuth();
+  const { totalItems } = useCart();
 
   return (
     <header>
@@ -53,6 +55,7 @@ export default function Navbar() {
             <Button variant="contained">
               <ShoppingCart />
               Cart
+              {totalItems > 0 && ` (${totalItems})`}
             </Button>
           </Link>
         </div>

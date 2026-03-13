@@ -1,4 +1,10 @@
-import { createContext, useContext, useEffect, useState } from "react";
+import {
+  createContext,
+  useCallback,
+  useContext,
+  useEffect,
+  useState,
+} from "react";
 import { useNavigate } from "react-router";
 
 const API = import.meta.env.VITE_API_BASE + "/users";
@@ -16,7 +22,7 @@ export function AuthProvider({ children }) {
     }
   }, []);
 
-  const register = async (credentials) => {
+  const register = useCallback(async (credentials) => {
     const response = await fetch(API + "/register", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -28,9 +34,9 @@ export function AuthProvider({ children }) {
     }
     setToken(result.token);
     window.sessionStorage.setItem("token", result.token);
-  };
+  }, []);
 
-  const login = async (credentials) => {
+  const login = useCallback(async (credentials) => {
     const response = await fetch(API + "/login", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -42,13 +48,13 @@ export function AuthProvider({ children }) {
     }
     setToken(result.token);
     window.sessionStorage.setItem("token", result.token);
-  };
+  }, []);
 
-  const logout = () => {
+  const logout = useCallback(() => {
     setToken(null);
     window.sessionStorage.removeItem("token");
     navigate("/products");
-  };
+  }, []);
 
   const value = { token, register, login, logout };
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;

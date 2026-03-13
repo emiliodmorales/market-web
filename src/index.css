@@ -11,10 +11,12 @@ nav,
   gap: 1rem;
 }
 
-.register,
-.login {
-  width: 100vw;
+main > div {
+  width: 80vw;
   height: 40vh;
+  padding-top: 10vh;
+  padding-left: 10vw;
+  padding-right: 10vw;
 
   display: grid;
   justify-items: center;
@@ -32,4 +34,16 @@ form label {
 form input {
   padding: 1ch;
   border: 1px solid gray;
+}
+
+.products ul {
+  list-style-type: none;
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.products li {
+  border: 1px solid gray;
+  padding: 1rem;
 }
